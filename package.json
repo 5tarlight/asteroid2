@@ -3,5 +3,13 @@
     "discord.js": "^11.5.1",
     "mysql": "^2.17.1",
     "node-qsb": "^0.0.4"
-  }
+  },
+  "name": "asteroid2",
+  "version": "1.0.0",
+  "description": "new compact asteroid bot",
+  "main": "index.js",
+  "repository": "https://github.com/5tarlight/asteroid2",
+  "author": "5tarlight <developerstarlight@gmail.com>",
+  "license": "AGPL-3.0",
+  "private": false
 }
