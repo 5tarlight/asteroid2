@@ -7,4 +7,8 @@ bot.on('ready', () => {
   console.log('login')
 })
 
+bot.on('message', msg => {
+  
+})
+
 bot.login(config.token)
