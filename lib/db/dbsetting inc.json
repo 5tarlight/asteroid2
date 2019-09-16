@@ -1,0 +1,7 @@
+{
+  "host": "localhost",
+  "port": 3306,
+  "database": "asteroid2",
+  "user": "root",
+  "password": "YOUR DB PASSWORD HERE"
+}
