@@ -7,6 +7,8 @@ const bot = new Client()
 
 const commands = [ new Ping() ]
 
+export function getCommands() { return commands }
+
 bot.on('ready', () => {
   success(`Login as ${bot.user.tag}`)
 })
