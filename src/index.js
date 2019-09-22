@@ -32,6 +32,12 @@ bot.on('message', msg => {
       info(msg.author.id + '  ' +cmd)
       command.run(bot, msg, args)
       return
+    } else {
+      if (command.aliases.includes(cmd)) {
+        info(msg.author.id + '  ' +cmd)
+        command.run(bot, msg, args)
+        return
+      }
     }
   })
 })
