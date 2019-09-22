@@ -1,10 +1,11 @@
 const Discord = require('discord.js')
 const config = require('./lib/config/config')
+const logger = require('korean-logger')
 
 const bot = new Discord.Client()
 
 bot.on('ready', () => {
-  console.log('login')
+  logger.success(`Login as ${bot.user.tag}`)
 })
 
 bot.on('message', msg => {
