@@ -29,12 +29,12 @@ bot.on('message', msg => {
 
   commands.forEach(command => {
     if(command.cmd === cmd) {
-      info(msg.author.id + '  ' +cmd)
+      info(msg.author.id + ' ' +cmd)
       command.run(bot, msg, args)
       return
     } else {
       if (command.aliases.includes(cmd)) {
-        info(msg.author.id + '  ' +cmd)
+        info(msg.author.id + ' ' +cmd)
         command.run(bot, msg, args)
         return
       }
