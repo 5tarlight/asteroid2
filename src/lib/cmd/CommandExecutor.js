@@ -1,9 +1,9 @@
 class CommandExecutor {
-  run(bot, msg, args) {
-    msg.reply('⚠ This command is not overrided ⚠')    
+  run (bot, msg, args) {
+    msg.reply('⚠ This command is not overrided ⚠')
   }
 
-  constructor() {
+  constructor () {
     this.name = ''
     this.description = ''
     this.aliases = []
