@@ -1,11 +1,14 @@
 import { Client } from 'discord.js'
 import config from './lib/config/config.json'
 import { success, info } from 'korean-logger'
-import { Ping } from './lib/cmd'
+import { Ping, Help } from './lib/cmd'
 
 const bot = new Client()
 
-const commands = [ new Ping() ]
+const commands = [
+  new Ping(),
+  new Help()
+]
 
 export function getCommands() { return commands }
 
