@@ -13,8 +13,14 @@
   "author": "5tarlight <developerstarlight@gmail.com>",
   "license": "AGPL-3.0",
   "private": false,
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  },
   
   "scripts": {
-    "start": "node index"
+    "start": "node bin/index",
+    "build": "babel src -d bin --copy-files",
+    "watch": "babel src -w -d bin --copy-files"
   }
 }
