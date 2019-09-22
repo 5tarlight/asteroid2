@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "babel-preset-es2016": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
     "discord.js": "^11.5.1",
     "korean-logger": "^1.0.6",
     "mysql": "^2.17.1",
