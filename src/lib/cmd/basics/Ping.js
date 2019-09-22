@@ -13,9 +13,10 @@ class Ping extends CommandExecutor {
   constructor () {
     super()
 
-    super.name = 'ping'
-    super.aliases = ['핑', '퐁', 'pong', 'delay', '딜레이']
-    super.description = '봇의 핑을 보여줍니다.'
+    this.cmd = 'ping'
+    this.aliases = ['핑', '퐁', 'pong', 'delay', '딜레이']
+    this.description = '봇의 핑을 보여줍니다.'
+    this.category = 'basic'
   }
 }
 
