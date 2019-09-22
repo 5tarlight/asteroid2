@@ -3,9 +3,25 @@ import { RichEmbed } from 'discord.js'
 
 class Ping extends CommandExecutor {
   run (bot, msg, args) {
+    const ping = Math.round(bot.ping)
+    let color = ''
+    let des = ''
+
+    if (ping <= 100) {
+      color = '#5eff5e'
+      des = '✅ 핑이 낮습니다.'
+    } else if (ping > 100 && ping <= 200) {
+      color = '#ffa300'
+      des = '⚠ 핑이 보통 수준입니다.'
+    } else {
+      color = '#ff5555'
+      des = '📛 핑이 높습니다.'
+    }
+
     const embed = new RichEmbed()
-      .setTitle('퐁!')
-      .setDescription(bot.ping)
+      .setTitle(`**${ping}** ms`)
+      .setDescription(des)
+      .setColor(color)
 
     msg.channel.send(embed)
   }
