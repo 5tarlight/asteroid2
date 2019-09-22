@@ -20,6 +20,7 @@
   
   "scripts": {
     "start": "node bin/index",
+    "prestart": "babel src -d bin --copy-files",
     "build": "babel src -d bin --copy-files",
     "watch": "babel src -w -d bin --copy-files"
   }
