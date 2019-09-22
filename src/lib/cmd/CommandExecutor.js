@@ -4,12 +4,13 @@ class CommandExecutor {
   }
 
   constructor () {
-    this.name = ''
+    this.cmd = ''
     this.description = ''
     this.aliases = []
     this.isAdminOnly = false
     this.isDMAllowed = true
     this.isDev = false
+    this.category = ''
   }
 }
 
