@@ -13,6 +13,7 @@
   "author": "5tarlight <developerstarlight@gmail.com>",
   "license": "AGPL-3.0",
   "private": false,
+  
   "scripts": {
     "start": "node index"
   }

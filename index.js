@@ -8,7 +8,10 @@ bot.on('ready', () => {
 })
 
 bot.on('message', msg => {
-  
+  if(msg.author.bot) return
+  if(!msg.content.startsWith(`<@${bot.user.id}>`)) return
+
+  msg.reply('ㅌㅅㅌ')
 })
 
 bot.login(config.token)
