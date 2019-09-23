@@ -2,8 +2,11 @@ import { Client } from 'discord.js'
 import config from './lib/config/config.json'
 import { success, info } from 'korean-logger'
 import { Ping, Help } from './lib/cmd'
+import { RichEmbed } from 'discord.js'
 
 const bot = new Client()
+
+const admins = ['352755226224361482']
 
 const commands = [
   new Ping(),
@@ -33,16 +36,34 @@ bot.on('message', msg => {
   const args = content.split(' ').slice(1)
 
   commands.forEach(command => {
-    if(command.cmd === cmd) {
-      info(msg.author.id + ' ' +cmd)
+    if(command.cmd === cmd || command.aliases.includes(cmd)) {
+      if(!command.isDMAllowed && msg.channel.type === 'dm') {
+        const embed = new RichEmbed()
+          .setTitle('실패')
+          .setDescription('❌해당 명령어를 DM에서 사용하실 수 없습니다.')
+          .setColor('#ff5555')
+        
+          msg.channel.send(embed)
+          info(`${msg.author.id} ${cmd}(dm)`)
+          return
+      }
+
+      if(command.isAdminOnly) {
+        if(!admins.includes(msg.author.id)) {
+          const embed = new RichEmbed()
+            .setTitle('실패')
+            .setDescription('❌해당 명령어를 사용 할 수 있는 권한이 없습니다.')
+            .setColor('#ff5555')
+
+          msg.channel.send(embed)
+          info(`${msg.author.id} ${cmd}(forbidden)`)
+          return
+        }
+      }
+
+      info(msg.author.id + ' ' + cmd)
       command.run(bot, msg, args)
       return
-    } else {
-      if (command.aliases.includes(cmd)) {
-        info(msg.author.id + ' ' +cmd)
-        command.run(bot, msg, args)
-        return
-      }
     }
   })
 })
