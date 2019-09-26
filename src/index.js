@@ -8,9 +8,11 @@ const bot = new Client()
 
 const admins = ['352755226224361482']
 
+const help = new Help()
+
 const commands = [
   new Ping(),
-  new Help()
+  help
 ]
 
 export function getCommands() { return commands }
@@ -36,6 +38,10 @@ bot.on('message', msg => {
   const args = content.split(' ').slice(1)
 
   commands.forEach(command => {
+    if(cmd.trim() === '' || !cmd.trim()) {
+      help.run(bot, msg, args)
+    }
+    
     if(command.cmd === cmd || command.aliases.includes(cmd)) {
       if(!command.isDMAllowed && msg.channel.type === 'dm') {
         const embed = new RichEmbed()
