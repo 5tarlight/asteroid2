@@ -1,7 +1,7 @@
 import { Client } from 'discord.js'
 import config from './lib/config/config.json'
 import { success, info } from 'korean-logger'
-import { Ping, Help } from './lib/cmd'
+import { Ping, Help, Notice } from './lib/cmd'
 import { RichEmbed } from 'discord.js'
 
 const bot = new Client()
@@ -12,7 +12,8 @@ const help = new Help()
 
 const commands = [
   new Ping(),
-  help
+  help,
+  new Notice()
 ]
 
 export function getCommands() { return commands }
