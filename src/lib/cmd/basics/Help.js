@@ -5,12 +5,12 @@ import { getCommands } from '../../../index'
 class Help extends CommandExecutor {
   run (bot, msg, args) {
     const commands = getCommands()
-    
+
     if (args.length < 1) {
       const categories = []
 
       commands.forEach(command => {
-        if(!categories.includes(command.category)) {
+        if (!categories.includes(command.category)) {
           categories.push(command.category)
         }
       })
@@ -18,7 +18,7 @@ class Help extends CommandExecutor {
       const embed = new RichEmbed()
         .setTitle('카테고리')
         .setDescription('<@622743602292064277> 도움 <카테고리>')
-      
+
       categories.forEach(c => {
         embed.addField('**' + c + '**', '\u200B', true)
       })
@@ -31,7 +31,7 @@ class Help extends CommandExecutor {
     const helpCmds = []
 
     commands.forEach(c => {
-      if(c.category === category) {
+      if (c.category === category) {
         helpCmds.push(c)
       }
     })

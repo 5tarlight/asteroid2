@@ -1,8 +1,7 @@
-import { Client } from 'discord.js'
+import { Client, RichEmbed } from 'discord.js'
 import config from './lib/config/config.json'
 import { success, info } from 'korean-logger'
-import { Ping, Help, Notice } from './lib/cmd'
-import { RichEmbed } from 'discord.js'
+import { Ping, Help, Notice, ToS } from './lib/cmd'
 
 const bot = new Client()
 
@@ -13,10 +12,11 @@ const help = new Help()
 const commands = [
   new Ping(),
   help,
-  new Notice()
+  new Notice(),
+  new ToS()
 ]
 
-export function getCommands() { return commands }
+export function getCommands () { return commands }
 
 bot.on('ready', () => {
   success(`Login as ${bot.user.tag}`)
@@ -24,7 +24,7 @@ bot.on('ready', () => {
 
 bot.on('message', msg => {
   let prefix = ''
-  
+
   if (msg.author.bot) return
   if (msg.content.startsWith(`<@!${bot.user.id}>`)) {
     prefix = `<@!${bot.user.id}>`
@@ -39,24 +39,24 @@ bot.on('message', msg => {
   const args = content.split(' ').slice(1)
 
   commands.forEach(command => {
-    if(cmd.trim() === '' || !cmd.trim()) {
+    if (cmd.trim() === '' || !cmd.trim()) {
       help.run(bot, msg, args)
     }
-    
-    if(command.cmd === cmd || command.aliases.includes(cmd)) {
-      if(!command.isDMAllowed && msg.channel.type === 'dm') {
+
+    if (command.cmd === cmd || command.aliases.includes(cmd)) {
+      if (!command.isDMAllowed && msg.channel.type === 'dm') {
         const embed = new RichEmbed()
           .setTitle('실패')
           .setDescription('❌해당 명령어를 DM에서 사용하실 수 없습니다.')
           .setColor('#ff5555')
-        
-          msg.channel.send(embed)
-          info(`${msg.author.id} ${cmd}(dm)`)
-          return
+
+        msg.channel.send(embed)
+        info(`${msg.author.id} ${cmd}(dm)`)
+        return
       }
 
-      if(command.isAdminOnly) {
-        if(!admins.includes(msg.author.id)) {
+      if (command.isAdminOnly) {
+        if (!admins.includes(msg.author.id)) {
           const embed = new RichEmbed()
             .setTitle('실패')
             .setDescription('❌해당 명령어를 사용 할 수 있는 권한이 없습니다.')
@@ -70,7 +70,6 @@ bot.on('message', msg => {
 
       info(msg.author.id + ' ' + cmd)
       command.run(bot, msg, args)
-      return
     }
   })
 })

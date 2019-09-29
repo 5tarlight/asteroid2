@@ -2,14 +2,14 @@ import CommandExecutor from '../CommandExecutor'
 import { TextChannel } from 'discord.js'
 
 class Notice extends CommandExecutor {
-  run(bot, msg, args) {
+  run (bot, msg, args) {
     msg.channel.send('공지를 전송하는 중입니다...')
       .then(m => {
         const token = msg.content.replace('\n', ' ').split(' ')
         const notice = msg.content.slice(token[0].length + token[1].length + 2, msg.content.length)
         bot.guilds.forEach(guild => {
           const channel = guild.channels.find(val => (val.name.includes('공지') || val.name.includes('notice')))
-          if(channel instanceof TextChannel) {
+          if (channel instanceof TextChannel) {
             channel.send(notice)
           }
         })
@@ -18,7 +18,7 @@ class Notice extends CommandExecutor {
       })
   }
 
-  constructor() {
+  constructor () {
     super()
 
     this.cmd = 'notice'
