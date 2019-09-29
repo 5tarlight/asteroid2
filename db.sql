@@ -12,17 +12,15 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- Dumping database structure for asteroid
-CREATE DATABASE IF NOT EXISTS `asteroid` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `asteroid`;
+-- Dumping database structure for a2
+CREATE DATABASE IF NOT EXISTS `a2` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `a2`;
 
--- Dumping structure for table asteroid.user
+-- Dumping structure for table a2.user
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` bigint(20) unsigned NOT NULL,
-  `item` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '{}',
-  `money` bigint(100) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
-  KEY `id` (`id`)
+  `id` varchar(20) NOT NULL,
+  `item` longtext NOT NULL DEFAULT '{}',
+  `money` bigint(100) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
