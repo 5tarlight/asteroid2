@@ -3,7 +3,7 @@ import CommandExecutor from '../CommandExecutor'
 class ToS extends CommandExecutor {
   checkQueue (msg) {
     if (this.queue.includes(msg.author.id)) {
-      if ('동의|agree|약관동의|tosagree|agreetos'.split('|').includes(msg.content.trim().toLowerCas())) {
+      if (this.checkExp(msg)) {
         // 동의한거임 데이터베이스에 넣어주고 성공메세지 띄워주자
 
         return true
@@ -12,13 +12,21 @@ class ToS extends CommandExecutor {
         return true
       }
     } else {
-      if ('동의|agree|약관동의|tosagree|agreetos'.split('|').includes(msg.content.trim().toLowerCas())) {
+      if (this.checkExp(msg)) {
         // 약관 읽지도 않고 동의부터 한거임 싸우자
         return false
       } else {
         // 그냥 헛수고 한거임
         return false
       }
+    }
+  }
+
+  checkExp(msg) {
+    if ('동의|agree|약관동의|tosagree|agreetos'.split('|').includes(msg.content.trim().toLowerCas())) {
+      return true
+    } else {
+      return false
     }
   }
 
