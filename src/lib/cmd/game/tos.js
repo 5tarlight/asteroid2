@@ -1,8 +1,7 @@
 import CommandExecutor from '../CommandExecutor'
-import * as qsb from 'node-qsb'
 
 class ToS extends CommandExecutor {
-  checkQueue(msg) {
+  checkQueue (msg) {
     if (this.queue.includes(msg.author.id)) {
       if ('동의|agree|약관동의|tosagree|agreetos'.split('|').includes(msg.content.trim().toLowerCas())) {
         // 동의한거임 데이터베이스에 넣어주고 성공메세지 띄워주자
@@ -23,13 +22,13 @@ class ToS extends CommandExecutor {
     }
   }
 
-  run(bot, msg, args) {
+  run (bot, msg, args) {
     msg.channel.send(this.tos)
 
     this.queue.push(msg.author.id)
   }
 
-  constructor() {
+  constructor () {
     super()
 
     this.queue = []
