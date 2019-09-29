@@ -1,13 +1,35 @@
 import CommandExecutor from '../CommandExecutor'
+import * as qsb from 'node-qsb'
 
 class ToS extends CommandExecutor {
-  run (bot, msg, args) {
-    msg.channel.send(this.tos)
+  checkQueue(msg) {
+    if (this.queue.includes(msg.author.id)) {
+      if ('동의|agree|약관동의|tosagree|agreetos'.split('|').includes(msg.content.trim().toLowerCas())) {
+        // 동의한거임 데이터베이스에 넣어주고 성공메세지 띄워주자
 
-
+        return true
+      } else {
+        // 거절한거임 거절했다고 메세지 보내주자
+        return true
+      }
+    } else {
+      if ('동의|agree|약관동의|tosagree|agreetos'.split('|').includes(msg.content.trim().toLowerCas())) {
+        // 약관 읽지도 않고 동의부터 한거임 싸우자
+        return false
+      } else {
+        // 그냥 헛수고 한거임
+        return false
+      }
+    }
   }
 
-  constructor () {
+  run(bot, msg, args) {
+    msg.channel.send(this.tos)
+
+    this.queue.push(msg.author.id)
+  }
+
+  constructor() {
     super()
 
     this.queue = []

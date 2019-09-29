@@ -8,12 +8,13 @@ const bot = new Client()
 const admins = ['352755226224361482']
 
 const help = new Help()
+const tos = new ToS()
 
 const commands = [
   new Ping(),
   help,
   new Notice(),
-  new ToS()
+  tos
 ]
 
 export function getCommands () { return commands }
@@ -23,6 +24,8 @@ bot.on('ready', () => {
 })
 
 bot.on('message', msg => {
+  ToS.checkQueue(msg)
+
   let prefix = ''
 
   if (msg.author.bot) return
