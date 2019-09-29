@@ -1,9 +1,10 @@
 import CommandExecutor from '../CommandExecutor'
-import { RichEmbed } from 'discord.js'
 
 class ToS extends CommandExecutor {
   run (bot, msg, args) {
     msg.channel.send(this.tos)
+
+
   }
 
   constructor () {
@@ -14,6 +15,7 @@ class ToS extends CommandExecutor {
 에스터로이드 이용약관
 
 본 약관에 동의하지 않으면 봇을 정상적으로 이용하실 수 없습니다.
+약관에 동의하시려면 \`동의\`를 동의하지 않으시려면 아무 글이나 써 주시면 됩니다.
 
   1. 본 봇을 이용하는 모든 유저는 이 약관에 동의했다고 간주한다.
   2. 게임 데이터 처리를 위해 사용자의 디스코드 id 를 수집하며 제 3자에게 공개하지 않는다.
