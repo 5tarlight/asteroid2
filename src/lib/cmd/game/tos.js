@@ -23,7 +23,7 @@ class ToS extends CommandExecutor {
   }
 
   checkExp(msg) {
-    if ('동의|agree|약관동의|tosagree|agreetos'.split('|').includes(msg.content.trim().toLowerCas())) {
+    if ('동의|agree|약관동의|tosagree|agreetos'.split('|').includes(msg.content.trim().toLowerCase())) {
       return true
     } else {
       return false
