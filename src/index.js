@@ -24,7 +24,7 @@ bot.on('ready', () => {
 })
 
 bot.on('message', msg => {
-  ToS.checkQueue(msg)
+  tos.checkQueue(msg)
 
   let prefix = ''
 
