@@ -1,11 +1,23 @@
 import CommandExecutor from '../CommandExecutor'
+import qsb from 'node-qsb'
+import DB from '../../db/Database'
 
 class ToS extends CommandExecutor {
   checkQueue (msg) {
     if (this.queue.includes(msg.author.id)) {
       if (this.checkExp(msg)) {
-        // 동의한거임 데이터베이스에 넣어주고 성공메세지 띄워주자
+        const params = {
+          cols: ['id'],
+          vals: [msg.author.id]
+        }
 
+        const qs = new qsb()
+          .insert('user')
+          .values(params.cols, params.vals)
+          .build()
+          
+
+        // 동의한거임 데이터베이스에 넣어주고 성공메세지 띄워주자
         return true
       } else {
         // 거절한거임 거절했다고 메세지 보내주자
