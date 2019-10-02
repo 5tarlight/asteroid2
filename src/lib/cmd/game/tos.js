@@ -52,7 +52,6 @@ class ToS extends CommandExecutor {
         })
       } else {
         // 거절한거임 거절했다고 메세지 보내주자
-        
 
         msg.reply('약관에 거부하셨습니다. 봇의 모든 기능을 정상적으로 이용하실 수 없습니다.')
       }
