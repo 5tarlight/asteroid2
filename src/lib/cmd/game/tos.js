@@ -5,56 +5,41 @@ import { error } from 'korean-logger'
 class ToS extends CommandExecutor {
   checkQueue (msg) {
     if (this.queue.includes(msg.author.id)) {
-      if (this.checkExp(msg)) {
-        const vals = [msg.author.id]
+      const check = new DB()
+      const query = `SELECT * FROM user WHERE id=?`
 
-        const presql = `SELECT * FROM user WHERE id=?`
-        const sql = `INSERT INTO user VALUES (?, '{}', 0)`
-
-        const sess = new DB()
-
-        sess.query(presql, vals)
+      check.query(query, [msg.author.id])
         .then(rows => {
           if(rows.length > 0) {
-            // 중복 id 감지됨
-
-            this.queue.forEach((q, i) => {
-              if(q === msg.author.id) {
-                this.queue.splice(i, 1)
-              }
-            })
-
             msg.reply('이미 동의한 계정입니다.')
             return
           }
-
-          sess.query(sql, vals).then(rows => {
-            msg.reply('정상적으로 처리되었습니다.')
-
-            return sess.close()
-          }, err => {
-            msg.reply('오류가 발생했습니다 Starlight#7528로 문의 바랍니다.')
-
-
-            return sess.close().then(() => {
-              throw err
+          if (this.checkExp(msg)) {
+            const vals = [msg.author.id]
+    
+            const presql = `SELECT * FROM user WHERE id=?`
+            const sql = `INSERT INTO user VALUES (?, '{}', 0)`
+    
+            const sess = new DB()
+    
+            sess.query(sql, vals).then(rows => {
+              msg.reply('정상적으로 처리되었습니다.')
+    
+              return sess.close()
+            }, err => {
+              msg.reply('오류가 발생했습니다 Starlight#7528로 문의 바랍니다.')
+    
+    
+              return sess.close().then(() => {
+                throw err
+              })
             })
-          })
-        }, err => {
-          msg.reply('오류가 발생했습니다 Starlight#7528로 문의 바랍니다.')
-
-
-          return sess.close().then(() => {
-            throw err
-          })
-        }).catch(err => {
-          error(err.stack)
+          } else {
+            // 거절한거임 거절했다고 메세지 보내주자
+    
+            msg.reply('약관에 거부하셨습니다. 봇의 모든 기능을 정상적으로 이용하실 수 없습니다.')
+          }
         })
-      } else {
-        // 거절한거임 거절했다고 메세지 보내주자
-
-        msg.reply('약관에 거부하셨습니다. 봇의 모든 기능을 정상적으로 이용하실 수 없습니다.')
-      }
 
       this.deleteId(msg.author.id)
       return true
