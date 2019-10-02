@@ -6,9 +6,9 @@ class Database {
     this.connection = createConnection(config)
   }
 
-  query (sql) {
+  query (sql, values) {
     return new Promise((resolve, reject) => {
-      this.connection.query(sql, (err, rows) => {
+      this.connection.query(sql, values, (err, rows) => {
         if (err) { return reject(err) }
         resolve(rows)
       })
