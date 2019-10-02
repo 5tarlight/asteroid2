@@ -50,20 +50,15 @@ class ToS extends CommandExecutor {
         }).catch(err => {
           error(err.stack)
         })
-
-        return true
       } else {
         // 거절한거임 거절했다고 메세지 보내주자
-        this.queue.forEach((q, i) => {
-          if(q === msg.author.id) {
-            this.queue.splice(i, 1)
-          }
-        })
+        
 
         msg.reply('약관에 거부하셨습니다. 봇의 모든 기능을 정상적으로 이용하실 수 없습니다.')
-
-        return true
       }
+
+      this.deleteId(msg.author.id)
+      return true
     } else {
       if (this.checkExp(msg)) {
         // 약관 읽지도 않고 동의부터 한거임 싸우자
@@ -73,6 +68,14 @@ class ToS extends CommandExecutor {
         return false
       }
     }
+  }
+
+  deleteId(id) {
+    this.queue.forEach((q, i) => {
+      if(q === id) {
+        this.queue.splice(i, 1)
+      }
+    })
   }
 
   checkExp(msg) {
