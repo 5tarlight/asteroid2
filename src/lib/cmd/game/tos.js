@@ -1,23 +1,48 @@
 import CommandExecutor from '../CommandExecutor'
-import qsb from 'node-qsb'
 import DB from '../../db/Database'
+import { error } from 'korean-logger'
 
 class ToS extends CommandExecutor {
   checkQueue (msg) {
     if (this.queue.includes(msg.author.id)) {
       if (this.checkExp(msg)) {
-        const params = {
-          cols: ['id'],
-          vals: [msg.author.id]
-        }
+        const vals = [msg.author.id]
 
-        const qs = new qsb()
-          .insert('user')
-          .values(params.cols, params.vals)
-          .build()
-          
+        const presql = `SELECT * FROM user WHERE id=?`
+        const sql = `INSERT INTO user VALUES (?, '{}', 0)`
 
-        // 동의한거임 데이터베이스에 넣어주고 성공메세지 띄워주자
+        const sess = new DB()
+
+        sess.query(presql, vals)
+        .then(rows => {
+          if(rows.length > 0) {
+            // 중복 id 감지됨
+            msg.reply('이미 동의한 계정입니다.')
+            return
+          }
+
+          sess.query(sql, vals).then(rows => {
+            msg.reply('정상적으로 처리되었습니다.')
+
+            return sess.close()
+          }, err => {
+            msg.reply('오류가 발생했습니다 Starlight#7528로 문의 바랍니다.')
+
+
+            return sess.close().then(() => {
+              throw err
+            })
+          })
+        }, err => {
+          msg.reply('오류가 발생했습니다 Starlight#7528로 문의 바랍니다.')
+
+
+          return sess.close().then(() => {
+            throw err
+          })
+        }).catch(err => {
+          error(err.stack)
+        })
         return true
       } else {
         // 거절한거임 거절했다고 메세지 보내주자
