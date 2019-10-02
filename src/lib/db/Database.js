@@ -1,9 +1,9 @@
-const mysql = require('mysql')
-const config = require('./dbsetting')
+import { createConnection } from 'mysql'
+import * as config from '../db/dbsetting.json'
 
 class Database {
   constructor () {
-    this.connection = mysql.createConnection(config)
+    this.connection = createConnection(config)
   }
 
   query (sql) {
@@ -25,4 +25,4 @@ class Database {
   }
 }
 
-module.exports = Database
+export default Database
