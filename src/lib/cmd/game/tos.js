@@ -17,6 +17,13 @@ class ToS extends CommandExecutor {
         .then(rows => {
           if(rows.length > 0) {
             // 중복 id 감지됨
+
+            this.queue.forEach((q, i) => {
+              if(q === msg.author.id) {
+                this.queue.splice(i, 1)
+              }
+            })
+
             msg.reply('이미 동의한 계정입니다.')
             return
           }
@@ -47,6 +54,12 @@ class ToS extends CommandExecutor {
         return true
       } else {
         // 거절한거임 거절했다고 메세지 보내주자
+        this.queue.forEach((q, i) => {
+          if(q === msg.author.id) {
+            this.queue.splice(i, 1)
+          }
+        })
+
         msg.reply('약관에 거부하셨습니다. 봇의 모든 기능을 정상적으로 이용하실 수 없습니다.')
 
         return true
