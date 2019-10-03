@@ -38,6 +38,9 @@ class ToS extends CommandExecutor {
             msg.reply('약관에 거부하셨습니다. 봇의 모든 기능을 정상적으로 이용하실 수 없습니다.')
           }
         })
+        .catch(err => {
+          error(err.stack)
+        })
 
       this.deleteId(msg.author.id)
       return true
