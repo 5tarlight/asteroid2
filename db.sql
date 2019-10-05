@@ -16,11 +16,23 @@
 CREATE DATABASE IF NOT EXISTS `a2` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `a2`;
 
+-- Dumping structure for table a2.black
+CREATE TABLE IF NOT EXISTS `black` (
+  `id` varchar(20) NOT NULL,
+  `reason` varchar(1000) DEFAULT 'No Reason',
+  `started_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
 -- Dumping structure for table a2.user
 CREATE TABLE IF NOT EXISTS `user` (
   `id` varchar(20) NOT NULL,
   `item` longtext NOT NULL DEFAULT '{}',
-  `money` bigint(100) NOT NULL DEFAULT 0
+  `money` bigint(100) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
