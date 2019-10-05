@@ -16,7 +16,7 @@ class ToS extends CommandExecutor {
           }
           if (this.checkExp(msg)) {
             const vals = [msg.author.id]
-            const sql = `INSERT INTO user VALUES (?, '{}', 0)`
+            const sql = `INSERT INTO user (id) VALUES (?)`
     
             const sess = new DB()
     
