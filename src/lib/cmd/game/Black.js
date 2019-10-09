@@ -7,7 +7,7 @@ class Black extends CommandExecutor {
 
     const db = new Database()
 
-    db.query(db, [msg.author.id])
+    db.query(checkBlacked, [msg.author.id])
       .then(rows => {
         if(rows.length > 0) {
           // 유저가 이미 블랙먹음 언밴 하자
